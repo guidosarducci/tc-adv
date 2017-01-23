@@ -57,8 +57,8 @@ static void explain(void)
 "                  internet* | oceanic | satellite | interplanetary ]\n"
 "                [ besteffort | diffserv8 | diffserv4 | diffserv-llt |\n"
 "                  diffserv3* ]\n"
-"                [ flowblind | srchost | dsthost | hosts | flows* |\n"
-"                  dual-srchost | dual-dsthost | triple-isolate ]\n"
+"                [ flowblind | srchost | dsthost | srcdsthost | flows* |\n"
+"                  srchost-flows | dsthost-flows | srcdsthost-flows ]\n"
 "                [ nat | nonat* ]\n"
 "                [ wash | nowash * ]\n"
 "                [ memlimit LIMIT ]\n"
@@ -163,15 +163,15 @@ static int cake_parse_opt(struct qdisc_util *qu, int argc, char **argv,
 			flowmode = 1;
 		} else if (strcmp(*argv, "dsthost") == 0) {
 			flowmode = 2;
-		} else if (strcmp(*argv, "hosts") == 0) {
+		} else if (strcmp(*argv, "srcdsthost") == 0) {
 			flowmode = 3;
 		} else if (strcmp(*argv, "flows") == 0) {
 			flowmode = 4;
-		} else if (strcmp(*argv, "dual-srchost") == 0) {
+		} else if (strcmp(*argv, "srchost-flows") == 0) {
 			flowmode = 5;
-		} else if (strcmp(*argv, "dual-dsthost") == 0) {
+		} else if (strcmp(*argv, "dsthost-flows") == 0) {
 			flowmode = 6;
-		} else if (strcmp(*argv, "triple-isolate") == 0) {
+		} else if (strcmp(*argv, "srcdsthost-flows") == 0) {
 			flowmode = 7;
 
 		} else if (strcmp(*argv, "nat") == 0) {
@@ -437,19 +437,19 @@ static int cake_print_opt(struct qdisc_util *qu, FILE *f, struct rtattr *opt)
 			fprintf(f, "dsthost ");
 			break;
 		case 3:
-			fprintf(f, "hosts ");
+			fprintf(f, "srcdsthost ");
 			break;
 		case 4:
 			fprintf(f, "flows ");
 			break;
 		case 5:
-			fprintf(f, "dual-srchost ");
+			fprintf(f, "srchost-flows ");
 			break;
 		case 6:
-			fprintf(f, "dual-dsthost ");
+			fprintf(f, "dsthost-flows ");
 			break;
 		case 7:
-			fprintf(f, "triple-isolate ");
+			fprintf(f, "srcdsthost-flows ");
 			break;
 		default:
 			fprintf(f, "(?flowmode?) ");

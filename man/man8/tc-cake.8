@@ -55,15 +55,15 @@ TIME |
 |
 .B dsthost
 |
-.B hosts
+.B srcdsthost
 |
 .B flows
 |
-.B dual-srchost
+.B srchost-flows
 |
-.B dual-dsthost
+.B dsthost-flows
 |
-.B triple-isolate
+.B srcdsthost-flows
 ]
 .br
 	[
@@ -361,7 +361,7 @@ individual flows, or any combination of those is desired.
 .br
 	Flows are defined only by destination address.  Could be useful on the ingress path of an ISP backhaul.
 .PP
-.B hosts
+.B srcdsthost
 .br
 	Flows are defined by source-destination host pairs.  This is host isolation, rather than flow isolation.
 .PP
@@ -372,23 +372,23 @@ individual flows, or any combination of those is desired.
 protocol, source port and destination port.  This is the type of flow isolation performed by
 SFQ and fq_codel.
 .PP
-.B dual-srchost
+.B srchost-flows
 .br
 	Flows are defined by the 5-tuple, and fairness is applied first over source addresses, then
 over individual flows.  Good for use on egress traffic from a LAN to the internet, where it'll
 prevent any one LAN host from monopolising the uplink, regardless of the number of flows they use.
 .PP
-.B dual-dsthost
+.B dsthost-flows
 .br
 	Flows are defined by the 5-tuple, and fairness is applied first over destination addresses, then
 over individual flows.  Good for use on ingress traffic to a LAN from the internet, where it'll
 prevent any one LAN host from monopolising the downlink, regardless of the number of flows they use.
 .PP
-.B triple-isolate
+.B srcdsthost-flows
 .br
 	Flows are defined by the 5-tuple, and fairness is applied over source *and* destination addresses
 intelligently (ie. not merely by host-pairs), and also over individual flows.  Use this if you're
-not certain whether to use dual-srchost or dual-dsthost; it'll do both jobs at once, preventing
+not certain whether to use srchost-flows or dsthost-flows; it'll do both jobs at once, preventing
 any one host on *either* side of the link from monopolising it with a large number of flows.
 .PP
 .B nat

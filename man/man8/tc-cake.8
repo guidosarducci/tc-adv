@@ -366,6 +366,7 @@ individual flows, or any combination of those is desired.
 	Flows are defined by source-destination host pairs.  This is host isolation, rather than flow isolation.
 .PP
 .B flows
+(default)
 .br
 	Flows are defined by the entire 5-tuple of source address, destination address, transport
 protocol, source port and destination port.  This is the type of flow isolation performed by
@@ -384,7 +385,6 @@ over individual flows.  Good for use on ingress traffic to a LAN from the intern
 prevent any one LAN host from monopolising the downlink, regardless of the number of flows they use.
 .PP
 .B triple-isolate
-(default)
 .br
 	Flows are defined by the 5-tuple, and fairness is applied over source *and* destination addresses
 intelligently (ie. not merely by host-pairs), and also over individual flows.  Use this if you're
